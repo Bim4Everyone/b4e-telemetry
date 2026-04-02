@@ -94,12 +94,14 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           push: true
-          context: src/Telemetry.Api
+          context: .
+          file: src/Telemetry.Api/Dockerfile
           tags: pyrevitlabs/pyrevit-telemetry:latest
   
       - name: Build and push
         uses: docker/build-push-action@v7
         with:
           push: true
-          context: src/Telemetry.Api
+          context: .
+          file: src/Telemetry.Api/Dockerfile
           tags: pyrevitlabs/pyrevit-telemetry:${{ env.VERSION }}
