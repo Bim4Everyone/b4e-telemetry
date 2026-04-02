@@ -74,6 +74,7 @@ jobs:
   docker-publish:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v6
       - name: Generate version
         run: echo "VERSION=2.0.0.${{ github.run_number }}" >> $GITHUB_ENV
       
