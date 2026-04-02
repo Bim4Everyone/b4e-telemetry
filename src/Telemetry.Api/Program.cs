@@ -23,7 +23,11 @@ builder.Host.UseSerilog(Log.Logger);
 
 builder.Services.AddHttpLogging(logging =>
 {
-    logging.LoggingFields = HttpLoggingFields.All;
+    logging.LoggingFields = HttpLoggingFields.RequestMethod | 
+                            HttpLoggingFields.RequestPath | 
+                            HttpLoggingFields.ResponseStatusCode |
+                            HttpLoggingFields.Duration;
+    
     logging.RequestBodyLogLimit = 4096;
     logging.ResponseBodyLogLimit = 4096;
 });
