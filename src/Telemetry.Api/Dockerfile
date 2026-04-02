@@ -14,6 +14,10 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
+COPY ["Directory.Build.props", "Directory.Build.props"]
+COPY ["Directory.Build.targets", "Directory.Build.targets"]
+COPY ["Directory.Packages.props", "Directory.Packages.props"]
+
 COPY ["src/Telemetry.Api/Telemetry.Api.csproj", "Telemetry.Api/"]
 COPY ["src/Telemetry.Migrations.Oracle/Telemetry.Migrations.Oracle.csproj", "Telemetry.Migrations.Oracle/"]
 COPY ["src/Telemetry.Migrations.Postgres/Telemetry.Migrations.Postgres.csproj", "Telemetry.Migrations.Postgres/"]
