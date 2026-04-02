@@ -15,7 +15,7 @@ namespace Telemetry.Api.Application.Mappings
         /// <returns>A new instance of the model object created from the source.</returns>
         public static MetaRecord ToModel(this MetaDto dto)
         {
-            return new MetaRecord {SchemaVersion = new Version(dto.SchemaVersion.Major, dto.SchemaVersion.Minor)};
+            return new MetaRecord {SchemaVersion = (Version)dto.SchemaVersion.Clone()};
         }
 
         /// <summary>
@@ -25,7 +25,8 @@ namespace Telemetry.Api.Application.Mappings
         /// <returns>A new instance of the data transfer object (DTO) created from the source.</returns>
         public static MetaDto ToDto(this MetaRecord model)
         {
-            return new MetaDto {SchemaVersion = new Version(model.SchemaVersion.Major, model.SchemaVersion.Minor)};
+
+            return new MetaDto {SchemaVersion = (Version)model.SchemaVersion.Clone()};
         }
 
         /// <summary>
