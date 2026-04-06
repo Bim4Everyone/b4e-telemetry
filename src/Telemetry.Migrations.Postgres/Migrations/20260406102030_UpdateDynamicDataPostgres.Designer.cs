@@ -2,144 +2,147 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Telemetry.Api.Infrastructure.Persistence;
 
 #nullable disable
 
-namespace Telemetry.Migrations.SqlServer.Migrations
+namespace Telemetry.Migrations.Postgres.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260406102030_UpdateDynamicDataPostgres")]
+    partial class UpdateDynamicDataPostgres
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "10.0.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
             modelBuilder.Entity("Telemetry.Api.Domain.Models.EventRecord", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("_id")
                         .HasAnnotation("Mongo:ElementName", "_id");
 
                     b.Property<bool?>("Cancellable")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("cancellable")
                         .HasAnnotation("Mongo:ElementName", "cancellable");
 
                     b.Property<bool?>("Cancelled")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("cancelled")
                         .HasAnnotation("Mongo:ElementName", "cancelled");
 
                     b.Property<int>("DocumentId")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("docid")
                         .HasAnnotation("Mongo:ElementName", "docid");
 
                     b.Property<string>("DocumentName")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("docname")
                         .HasAnnotation("Mongo:ElementName", "docname");
 
                     b.Property<string>("DocumentPath")
                         .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)")
+                        .HasColumnType("character varying(1024)")
                         .HasColumnName("docpath")
                         .HasAnnotation("Mongo:ElementName", "docpath");
 
                     b.Property<string>("DocumentTemplate")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("doctemplate")
                         .HasAnnotation("Mongo:ElementName", "doctemplate");
 
                     b.Property<string>("DocumentType")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("doctype")
                         .HasAnnotation("Mongo:ElementName", "doctype");
 
                     b.Property<string>("EventArgs")
                         .HasMaxLength(8000)
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("character varying(8000)")
                         .HasColumnName("args")
                         .HasAnnotation("Mongo:ElementName", "args");
 
                     b.Property<string>("EventType")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("type")
                         .HasAnnotation("Mongo:ElementName", "type");
 
                     b.Property<Guid>("HandlerId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("handler_id")
                         .HasAnnotation("Mongo:ElementName", "handler_id");
 
                     b.Property<string>("HostUsername")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("host_user")
                         .HasAnnotation("Mongo:ElementName", "host_user");
 
                     b.Property<string>("Meta")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("meta")
                         .HasAnnotation("Mongo:ElementName", "meta");
 
                     b.Property<string>("ProjectName")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("projectname")
                         .HasAnnotation("Mongo:ElementName", "projectname");
 
                     b.Property<string>("ProjectNum")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("projectnum")
                         .HasAnnotation("Mongo:ElementName", "projectnum");
 
                     b.Property<string>("RevitBuild")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("revitbuild")
                         .HasAnnotation("Mongo:ElementName", "revitbuild");
 
                     b.Property<string>("RevitVersion")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("revit")
                         .HasAnnotation("Mongo:ElementName", "revit");
 
                     b.Property<string>("Status")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("status")
                         .HasAnnotation("Mongo:ElementName", "status");
 
                     b.Property<DateTimeOffset>("Timestamp")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("timestamp")
                         .HasAnnotation("Mongo:ElementName", "timestamp");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("username")
                         .HasAnnotation("Mongo:ElementName", "username");
 
@@ -154,155 +157,155 @@ namespace Telemetry.Migrations.SqlServer.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("_id")
                         .HasAnnotation("Mongo:ElementName", "_id");
 
                     b.Property<string>("CloneName")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("clone")
                         .HasAnnotation("Mongo:ElementName", "clone");
 
                     b.Property<string>("CommandBundle")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("commandbundle")
                         .HasAnnotation("Mongo:ElementName", "commandbundle");
 
                     b.Property<string>("CommandExtension")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("commandextension")
                         .HasAnnotation("Mongo:ElementName", "commandextension");
 
                     b.Property<string>("CommandName")
                         .IsRequired()
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("commandname")
                         .HasAnnotation("Mongo:ElementName", "commandname");
 
                     b.Property<string>("CommandResults")
                         .HasMaxLength(8000)
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("character varying(8000)")
                         .HasColumnName("commandresults")
                         .HasAnnotation("Mongo:ElementName", "commandresults");
 
                     b.Property<string>("CommandUniqueName")
                         .IsRequired()
                         .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)")
+                        .HasColumnType("character varying(500)")
                         .HasColumnName("commanduniquename")
                         .HasAnnotation("Mongo:ElementName", "commanduniquename");
 
                     b.Property<string>("DocumentName")
                         .HasMaxLength(250)
-                        .HasColumnType("nvarchar(250)")
+                        .HasColumnType("character varying(250)")
                         .HasColumnName("docname")
                         .HasAnnotation("Mongo:ElementName", "docname");
 
                     b.Property<string>("DocumentPath")
                         .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)")
+                        .HasColumnType("character varying(1024)")
                         .HasColumnName("docpath")
                         .HasAnnotation("Mongo:ElementName", "docpath");
 
                     b.Property<string>("ExecId")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("exec_id")
                         .HasAnnotation("Mongo:ElementName", "exec_id");
 
                     b.Property<DateTimeOffset>("ExecTimestamp")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("exec_timestamp")
                         .HasAnnotation("Mongo:ElementName", "exec_timestamp");
 
                     b.Property<string>("HostUsername")
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("host_user")
                         .HasAnnotation("Mongo:ElementName", "host_user");
 
                     b.Property<bool>("IsConfig")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("config")
                         .HasAnnotation("Mongo:ElementName", "config");
 
                     b.Property<bool>("IsDebug")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("debug")
                         .HasAnnotation("Mongo:ElementName", "debug");
 
                     b.Property<bool>("IsExecFromGui")
-                        .HasColumnType("bit")
+                        .HasColumnType("boolean")
                         .HasColumnName("from_gui")
                         .HasAnnotation("Mongo:ElementName", "from_gui");
 
                     b.Property<string>("Meta")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("meta")
                         .HasAnnotation("Mongo:ElementName", "meta");
 
                     b.Property<string>("PyRevitVersion")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("pyrevit")
                         .HasAnnotation("Mongo:ElementName", "pyrevit");
 
                     b.Property<int>("ResultCode")
-                        .HasColumnType("int")
+                        .HasColumnType("integer")
                         .HasColumnName("resultcode")
                         .HasAnnotation("Mongo:ElementName", "resultcode");
 
                     b.Property<string>("RevitBuild")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("revitbuild")
                         .HasAnnotation("Mongo:ElementName", "revitbuild");
 
                     b.Property<string>("RevitVersion")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("revit")
                         .HasAnnotation("Mongo:ElementName", "revit");
 
                     b.Property<string>("ScriptPath")
                         .IsRequired()
                         .HasMaxLength(1024)
-                        .HasColumnType("nvarchar(1024)")
+                        .HasColumnType("character varying(1024)")
                         .HasColumnName("scriptpath")
                         .HasAnnotation("Mongo:ElementName", "scriptpath");
 
                     b.Property<Guid>("SessionId")
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("uuid")
                         .HasColumnName("sessionid")
                         .HasAnnotation("Mongo:ElementName", "sessionid");
 
                     b.Property<DateTimeOffset>("Timestamp")
-                        .HasColumnType("datetimeoffset")
+                        .HasColumnType("timestamp with time zone")
                         .HasColumnName("timestamp")
                         .HasAnnotation("Mongo:ElementName", "timestamp");
 
                     b.Property<string>("Trace")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                        .HasColumnType("text")
                         .HasColumnName("trace")
                         .HasAnnotation("Mongo:ElementName", "trace");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("character varying(100)")
                         .HasColumnName("username")
                         .HasAnnotation("Mongo:ElementName", "username");
 

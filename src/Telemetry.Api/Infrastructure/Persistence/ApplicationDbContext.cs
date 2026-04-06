@@ -151,8 +151,7 @@ namespace Telemetry.Api.Infrastructure.Persistence
 
                 entity.Property(e => e.Timestamp)
                     .HasColumnName("timestamp")
-                    .HasElementName("timestamp")
-                    .HasBsonRepresentation(BsonType.DateTime);
+                    .HasElementName("timestamp");
 
                 entity.Property(e => e.Username)
                     .HasColumnName("username")
@@ -196,8 +195,7 @@ namespace Telemetry.Api.Infrastructure.Persistence
 
                 entity.Property(e => e.ExecTimestamp)
                     .HasColumnName("exec_timestamp")
-                    .HasElementName("exec_timestamp")
-                    .HasBsonRepresentation(BsonType.DateTime);
+                    .HasElementName("exec_timestamp");
 
                 entity.Property(e => e.CommandBundle)
                     .HasColumnName("commandbundle")
@@ -215,7 +213,8 @@ namespace Telemetry.Api.Infrastructure.Persistence
                     .HasColumnName("commanduniquename")
                     .HasElementName("commanduniquename");
 
-                entity.Property(e => e.DocumentName).HasColumnName("docname")
+                entity.Property(e => e.DocumentName)
+                    .HasColumnName("docname")
                     .HasElementName("docname");
 
                 entity.Property(e => e.DocumentPath)
@@ -273,8 +272,7 @@ namespace Telemetry.Api.Infrastructure.Persistence
 
                 entity.Property(e => e.Timestamp)
                     .HasColumnName("timestamp")
-                    .HasElementName("timestamp")
-                    .HasBsonRepresentation(BsonType.DateTime);
+                    .HasElementName("timestamp");
 
                 entity.Property(e => e.Username)
                     .HasColumnName("username")
@@ -339,6 +337,24 @@ namespace Telemetry.Api.Infrastructure.Persistence
                         v => JsonSerializer.Serialize(v, JsonSerializerOptions.Web),
                         v => JsonSerializer.Deserialize<MetaRecord>(v, JsonSerializerOptions.Web)!);
             });
+
+            if (Database.ProviderName!.Equals("MongoDB.EntityFrameworkCore"))
+            {
+                modelBuilder.Entity<ScriptRecord>(entity =>
+                {
+                    entity.Property(e => e.Timestamp)
+                        .HasBsonRepresentation(BsonType.DateTime);
+
+                    entity.Property(e => e.ExecTimestamp)
+                        .HasBsonRepresentation(BsonType.DateTime);
+                });
+
+                modelBuilder.Entity<EventRecord>(entity =>
+                {
+                    entity.Property(e => e.Timestamp)
+                        .HasBsonRepresentation(BsonType.DateTime);
+                });
+            }
 
             base.OnModelCreating(modelBuilder);
         }

@@ -22,105 +22,127 @@ namespace Telemetry.Migrations.Sqlite.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("id");
+                        .HasColumnName("_id")
+                        .HasAnnotation("Mongo:ElementName", "_id");
 
                     b.Property<bool?>("Cancellable")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("cancellable");
+                        .HasColumnName("cancellable")
+                        .HasAnnotation("Mongo:ElementName", "cancellable");
 
                     b.Property<bool?>("Cancelled")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("cancelled");
+                        .HasColumnName("cancelled")
+                        .HasAnnotation("Mongo:ElementName", "cancelled");
 
                     b.Property<int>("DocumentId")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("docid");
+                        .HasColumnName("docid")
+                        .HasAnnotation("Mongo:ElementName", "docid");
 
                     b.Property<string>("DocumentName")
                         .HasMaxLength(250)
                         .HasColumnType("TEXT")
-                        .HasColumnName("docname");
+                        .HasColumnName("docname")
+                        .HasAnnotation("Mongo:ElementName", "docname");
 
                     b.Property<string>("DocumentPath")
                         .HasMaxLength(1024)
                         .HasColumnType("TEXT")
-                        .HasColumnName("docpath");
+                        .HasColumnName("docpath")
+                        .HasAnnotation("Mongo:ElementName", "docpath");
 
                     b.Property<string>("DocumentTemplate")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("doctemplate");
+                        .HasColumnName("doctemplate")
+                        .HasAnnotation("Mongo:ElementName", "doctemplate");
 
                     b.Property<string>("DocumentType")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("doctype");
+                        .HasColumnName("doctype")
+                        .HasAnnotation("Mongo:ElementName", "doctype");
 
                     b.Property<string>("EventArgs")
                         .HasMaxLength(8000)
                         .HasColumnType("TEXT")
-                        .HasColumnName("args");
+                        .HasColumnName("args")
+                        .HasAnnotation("Mongo:ElementName", "args");
 
                     b.Property<string>("EventType")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("type");
+                        .HasColumnName("type")
+                        .HasAnnotation("Mongo:ElementName", "type");
 
                     b.Property<Guid>("HandlerId")
                         .HasColumnType("TEXT")
-                        .HasColumnName("handler_id");
+                        .HasColumnName("handler_id")
+                        .HasAnnotation("Mongo:ElementName", "handler_id");
 
                     b.Property<string>("HostUsername")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("host_user");
+                        .HasColumnName("host_user")
+                        .HasAnnotation("Mongo:ElementName", "host_user");
 
                     b.Property<string>("Meta")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("meta");
+                        .HasColumnName("meta")
+                        .HasAnnotation("Mongo:ElementName", "meta");
 
                     b.Property<string>("ProjectName")
                         .HasMaxLength(250)
                         .HasColumnType("TEXT")
-                        .HasColumnName("projectname");
+                        .HasColumnName("projectname")
+                        .HasAnnotation("Mongo:ElementName", "projectname");
 
                     b.Property<string>("ProjectNum")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("projectnum");
+                        .HasColumnName("projectnum")
+                        .HasAnnotation("Mongo:ElementName", "projectnum");
 
                     b.Property<string>("RevitBuild")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("revitbuild");
+                        .HasColumnName("revitbuild")
+                        .HasAnnotation("Mongo:ElementName", "revitbuild");
 
                     b.Property<string>("RevitVersion")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("revit");
+                        .HasColumnName("revit")
+                        .HasAnnotation("Mongo:ElementName", "revit");
 
                     b.Property<string>("Status")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("status");
+                        .HasColumnName("status")
+                        .HasAnnotation("Mongo:ElementName", "status");
 
                     b.Property<DateTimeOffset>("Timestamp")
                         .HasColumnType("TEXT")
-                        .HasColumnName("timestamp");
+                        .HasColumnName("timestamp")
+                        .HasAnnotation("Mongo:ElementName", "timestamp");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("username");
+                        .HasColumnName("username")
+                        .HasAnnotation("Mongo:ElementName", "username");
 
                     b.HasKey("Id");
 
-                    b.ToTable("event_record", (string)null);
+                    b.ToTable("events", (string)null);
+
+                    b.HasAnnotation("Mongo:CollectionName", "events");
                 });
 
             modelBuilder.Entity("Telemetry.Api.Domain.Models.ScriptRecord", b =>
@@ -128,135 +150,162 @@ namespace Telemetry.Migrations.Sqlite.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("TEXT")
-                        .HasColumnName("id");
+                        .HasColumnName("_id")
+                        .HasAnnotation("Mongo:ElementName", "_id");
 
                     b.Property<string>("CloneName")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("clone");
+                        .HasColumnName("clone")
+                        .HasAnnotation("Mongo:ElementName", "clone");
 
                     b.Property<string>("CommandBundle")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("TEXT")
-                        .HasColumnName("commandbundle");
+                        .HasColumnName("commandbundle")
+                        .HasAnnotation("Mongo:ElementName", "commandbundle");
 
                     b.Property<string>("CommandExtension")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("TEXT")
-                        .HasColumnName("commandextension");
+                        .HasColumnName("commandextension")
+                        .HasAnnotation("Mongo:ElementName", "commandextension");
 
                     b.Property<string>("CommandName")
                         .IsRequired()
                         .HasMaxLength(250)
                         .HasColumnType("TEXT")
-                        .HasColumnName("commandname");
+                        .HasColumnName("commandname")
+                        .HasAnnotation("Mongo:ElementName", "commandname");
 
                     b.Property<string>("CommandResults")
                         .HasMaxLength(8000)
                         .HasColumnType("TEXT")
-                        .HasColumnName("commandresults");
+                        .HasColumnName("commandresults")
+                        .HasAnnotation("Mongo:ElementName", "commandresults");
 
                     b.Property<string>("CommandUniqueName")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("TEXT")
-                        .HasColumnName("commanduniquename");
+                        .HasColumnName("commanduniquename")
+                        .HasAnnotation("Mongo:ElementName", "commanduniquename");
 
                     b.Property<string>("DocumentName")
                         .HasMaxLength(250)
                         .HasColumnType("TEXT")
-                        .HasColumnName("docname");
+                        .HasColumnName("docname")
+                        .HasAnnotation("Mongo:ElementName", "docname");
 
                     b.Property<string>("DocumentPath")
                         .HasMaxLength(1024)
                         .HasColumnType("TEXT")
-                        .HasColumnName("docpath");
+                        .HasColumnName("docpath")
+                        .HasAnnotation("Mongo:ElementName", "docpath");
 
                     b.Property<string>("ExecId")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("exec_id");
+                        .HasColumnName("exec_id")
+                        .HasAnnotation("Mongo:ElementName", "exec_id");
 
                     b.Property<DateTimeOffset>("ExecTimestamp")
                         .HasColumnType("TEXT")
-                        .HasColumnName("exec_timestamp");
+                        .HasColumnName("exec_timestamp")
+                        .HasAnnotation("Mongo:ElementName", "exec_timestamp");
 
                     b.Property<string>("HostUsername")
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("host_user");
+                        .HasColumnName("host_user")
+                        .HasAnnotation("Mongo:ElementName", "host_user");
 
                     b.Property<bool>("IsConfig")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("config");
+                        .HasColumnName("config")
+                        .HasAnnotation("Mongo:ElementName", "config");
 
                     b.Property<bool>("IsDebug")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("debug");
+                        .HasColumnName("debug")
+                        .HasAnnotation("Mongo:ElementName", "debug");
 
                     b.Property<bool>("IsExecFromGui")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("from_gui");
+                        .HasColumnName("from_gui")
+                        .HasAnnotation("Mongo:ElementName", "from_gui");
 
                     b.Property<string>("Meta")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("meta");
+                        .HasColumnName("meta")
+                        .HasAnnotation("Mongo:ElementName", "meta");
 
                     b.Property<string>("PyRevitVersion")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("pyrevit");
+                        .HasColumnName("pyrevit")
+                        .HasAnnotation("Mongo:ElementName", "pyrevit");
 
                     b.Property<int>("ResultCode")
                         .HasColumnType("INTEGER")
-                        .HasColumnName("resultcode");
+                        .HasColumnName("resultcode")
+                        .HasAnnotation("Mongo:ElementName", "resultcode");
 
                     b.Property<string>("RevitBuild")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("revitbuild");
+                        .HasColumnName("revitbuild")
+                        .HasAnnotation("Mongo:ElementName", "revitbuild");
 
                     b.Property<string>("RevitVersion")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("revit");
+                        .HasColumnName("revit")
+                        .HasAnnotation("Mongo:ElementName", "revit");
 
                     b.Property<string>("ScriptPath")
                         .IsRequired()
                         .HasMaxLength(1024)
                         .HasColumnType("TEXT")
-                        .HasColumnName("scriptpath");
+                        .HasColumnName("scriptpath")
+                        .HasAnnotation("Mongo:ElementName", "scriptpath");
 
                     b.Property<Guid>("SessionId")
                         .HasColumnType("TEXT")
-                        .HasColumnName("sessionid");
+                        .HasColumnName("sessionid")
+                        .HasAnnotation("Mongo:ElementName", "sessionid");
 
                     b.Property<DateTimeOffset>("Timestamp")
                         .HasColumnType("TEXT")
-                        .HasColumnName("timestamp");
+                        .HasColumnName("timestamp")
+                        .HasAnnotation("Mongo:ElementName", "timestamp");
 
                     b.Property<string>("Trace")
                         .IsRequired()
                         .HasColumnType("TEXT")
-                        .HasColumnName("trace");
+                        .HasColumnName("trace")
+                        .HasAnnotation("Mongo:ElementName", "trace");
 
                     b.Property<string>("Username")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("TEXT")
-                        .HasColumnName("username");
+                        .HasColumnName("username")
+                        .HasAnnotation("Mongo:ElementName", "username");
 
                     b.HasKey("Id");
 
-                    b.ToTable("script_record", (string)null);
+                    b.ToTable("scripts", (string)null);
+
+                    b.HasAnnotation("Mongo:CollectionName", "scripts");
                 });
 #pragma warning restore 612, 618
         }
