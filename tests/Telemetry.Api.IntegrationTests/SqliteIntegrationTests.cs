@@ -1,3 +1,4 @@
+using System.Text;
 using Telemetry.Api.Application.DTOs;
 
 namespace Telemetry.Api.IntegrationTests
@@ -57,6 +58,34 @@ namespace Telemetry.Api.IntegrationTests
 
             // Act
             HttpResponseMessage response = await Client.PostAsJsonAsync("/api/v2/events", dto);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+        
+        [Test]
+        public async Task PostRawScript_ReturnsOk()
+        {
+            // Arrange
+            var content = await File.ReadAllTextAsync("assets/script.json");
+            var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+
+            // Act
+            HttpResponseMessage response = await Client.PostAsync("/api/v2/scripts", stringContent);
+
+            // Assert
+            response.EnsureSuccessStatusCode();
+        }
+
+        [Test]
+        public async Task PostRawEvent_ReturnsOk()
+        {
+            // Arrange
+            var content = await File.ReadAllTextAsync("assets/event.json");
+            var stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+            
+            // Act
+            HttpResponseMessage response = await Client.PostAsync("/api/v2/events", stringContent);
 
             // Assert
             response.EnsureSuccessStatusCode();

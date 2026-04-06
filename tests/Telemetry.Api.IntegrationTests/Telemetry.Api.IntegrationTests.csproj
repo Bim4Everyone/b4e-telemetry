@@ -25,8 +25,4 @@
         <ProjectReference Include="..\..\src\Telemetry.Migrations.SqlServer\Telemetry.Migrations.SqlServer.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="TestResults\"/>
-    </ItemGroup>
-
 </Project>
