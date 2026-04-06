@@ -15,28 +15,24 @@ namespace Telemetry.Api.Domain.Models
         ///     <br /><a href="https://pyrevitlabs.notion.site/Engines-7973ca3328c34fd1a95462f5c655475b">Engine types</a>.
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName("type")]
         public required string Type { get; init; }
 
         /// <summary>
         ///     Engine version.
         ///     <br /> <a href="https://pyrevitlabs.notion.site/Engines-7973ca3328c34fd1a95462f5c655475b">Engines list</a>.
         /// </summary>
-        [MaxLength(100)] 
-        [JsonPropertyName("version")]
+        [MaxLength(100)]
         public required string Version { get; init; }
 
         /// <summary>
         ///     System paths using by script.
         /// </summary>
-        [JsonPropertyName("syspath")]
         public string[]? SysPaths { get; init; }
 
         /// <summary>
         ///     Dynamic script configs data.
         /// </summary>
         [MaxLength(8000)]
-        [JsonPropertyName("configs")]
         public string? Configs { get; init; }
     }
 }

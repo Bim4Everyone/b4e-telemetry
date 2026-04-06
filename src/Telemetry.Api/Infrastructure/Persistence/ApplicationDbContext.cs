@@ -135,6 +135,12 @@ namespace Telemetry.Api.Infrastructure.Persistence
         /// <param name="modelBuilder">The builder used to define the model structure and relationships.</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ScriptRecord>()
+                .Ignore(u => u.Meta);
+
+            modelBuilder.Entity<EventRecord>()
+                .Ignore(u => u.Meta);
+
             modelBuilder.Entity<ScriptRecord>(entity =>
             {
                 entity.ToTable("scripts");
@@ -233,19 +239,32 @@ namespace Telemetry.Api.Infrastructure.Persistence
                     .HasColumnName("commandresults")
                     .HasElementName("commandresults");
 
-                entity.Property(e => e.Meta)
-                    .HasColumnName("meta")
-                    .HasElementName("meta")
-                    .HasConversion(
-                        v => JsonSerializer.Serialize(v, JsonSerializerOptions.Web),
-                        v => JsonSerializer.Deserialize<MetaRecord>(v, JsonSerializerOptions.Web)!);
+                entity.OwnsOne(e => e.Trace, trace =>
+                {
+                    trace.Property(e => e.Message)
+                        .HasColumnName("trace_message")
+                        .HasElementName("trace_message");
 
-                entity.Property(e => e.Trace)
-                    .HasColumnName("trace")
-                    .HasElementName("trace")
-                    .HasConversion(
-                        v => JsonSerializer.Serialize(v, JsonSerializerOptions.Web),
-                        v => JsonSerializer.Deserialize<TraceInfo>(v, JsonSerializerOptions.Web)!);
+                    trace.Property(e => e.Engine.Type)
+                        .HasColumnName("engine_type")
+                        .HasElementName("engine_type");
+
+                    trace.Property(e => e.Engine.Version)
+                        .HasColumnName("engine_configs")
+                        .HasElementName("engine_configs");
+
+                    trace.Property(e => e.Engine.Configs)
+                        .HasColumnName("configs")
+                        .HasElementName("configs");
+
+                    trace.Property(e => e.Engine.SysPaths)
+                        .HasColumnName("engine_syspath")
+                        .HasElementName("engine_syspath")
+                        .HasConversion(
+                            v => v == null ? null : string.Join(";", v),
+                            v => string.IsNullOrEmpty(v) ? null : v.Split(";")
+                        );
+                });
             });
 
             modelBuilder.Entity<EventRecord>(entity =>
@@ -329,13 +348,6 @@ namespace Telemetry.Api.Infrastructure.Persistence
                 entity.Property(e => e.EventArgs)
                     .HasColumnName("args")
                     .HasElementName("args");
-
-                entity.Property(e => e.Meta)
-                    .HasColumnName("meta")
-                    .HasElementName("meta")
-                    .HasConversion(
-                        v => JsonSerializer.Serialize(v, JsonSerializerOptions.Web),
-                        v => JsonSerializer.Deserialize<MetaRecord>(v, JsonSerializerOptions.Web)!);
             });
 
             if (Database.ProviderName!.Equals("MongoDB.EntityFrameworkCore"))
