@@ -40,6 +40,7 @@ namespace Telemetry.Api.Web.Controllers
         /// <returns>Returns adding script records task.</returns>
         [HttpPost("scripts")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [ProducesResponseType(503)]
         public async Task<IActionResult> PostScript([FromBody] ScriptRecordDto dto)
@@ -47,6 +48,16 @@ namespace Telemetry.Api.Web.Controllers
             try
             {
                 CancellationToken ct = HttpContext.RequestAborted;
+
+                if (dto.Meta.SchemaVersion != new Version(2, 0, 0))
+                {
+                    return BadRequest(new ProblemDetails()
+                    {
+                        Title = "Unsupported Schema Version",
+                        Detail = $"Expected version 2.0.0, but received {dto.Meta.SchemaVersion}",
+                        Status = StatusCodes.Status400BadRequest
+                    });
+                }
 
                 ScriptRecord record = dto.ToModel();
                 _context.ScriptRecords.Add(record);
@@ -74,6 +85,7 @@ namespace Telemetry.Api.Web.Controllers
         /// <returns>Returns adding event records task.</returns>
         [HttpPost("events")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(500)]
         [ProducesResponseType(503)]
         public async Task<IActionResult> PostEvent([FromBody] EventRecordDto dto)
@@ -81,6 +93,16 @@ namespace Telemetry.Api.Web.Controllers
             try
             {
                 CancellationToken ct = HttpContext.RequestAborted;
+                
+                if (dto.Meta.SchemaVersion != new Version(2, 0, 0))
+                {
+                    return BadRequest(new ProblemDetails()
+                    {
+                        Title = "Unsupported Schema Version",
+                        Detail = $"Expected version 2.0.0, but received {dto.Meta.SchemaVersion}",
+                        Status = StatusCodes.Status400BadRequest
+                    });
+                }
 
                 EventRecord record = dto.ToModel();
                 _context.EventRecords.Add(record);
