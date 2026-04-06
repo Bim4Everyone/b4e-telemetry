@@ -54,6 +54,24 @@ namespace Telemetry.Api.Infrastructure.Persistence
         public DbSet<ScriptRecord> ScriptRecords => Set<ScriptRecord>();
 
         /// <summary>
+        /// Asynchronously adds a new event record to the database context.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous add operation.</returns>
+        public async Task AddEventRecord(EventRecord eventRecord, CancellationToken cancellationToken)
+        {
+            await EventRecords.AddAsync(eventRecord, cancellationToken);
+        }
+
+        /// <summary>
+        /// Asynchronously adds a new script record to the database context.
+        /// </summary>
+        /// <returns>A task that represents the asynchronous add operation.</returns>
+        public async Task AddScriptRecord(ScriptRecord scriptRecord, CancellationToken cancellationToken)
+        {
+            await ScriptRecords.AddAsync(scriptRecord, cancellationToken);
+        }
+
+        /// <summary>
         /// Asynchronously checks whether a successful connection to the database can be established.
         /// This method verifies connectivity without performing any data manipulation or transactions.
         /// </summary>

@@ -10,28 +10,16 @@ namespace Telemetry.Api.Application.Interfaces
     public interface IApplicationDbContext
     {
         /// <summary>
-        /// Represents a collection of event records associated with an entity or process.
-        /// This property is used to store and manage information about specific occurrences
-        /// or actions that are relevant to the application context.
+        /// Asynchronously adds a new event record to the database context.
         /// </summary>
-        /// <remarks>
-        /// Event records stored in this property can include details such as timestamps,
-        /// descriptions, identifiers, and metadata. It is typically used for logging,
-        /// auditing, or tracking purposes.
-        /// </remarks>
-        DbSet<EventRecord> EventRecords { get; }
+        /// <returns>A task that represents the asynchronous add operation.</returns>
+        Task AddEventRecord(EventRecord eventRecord, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Stores a collection of script records associated with the application or system context.
-        /// This property is utilized to manage and organize information related to scripts,
-        /// their configurations, or execution details.
+        /// Asynchronously adds a new script record to the database context.
         /// </summary>
-        /// <remarks>
-        /// Script records contained in this property may include data such as script names,
-        /// execution statuses, parameters, or any related metadata. It is commonly used
-        /// for monitoring, debugging, or storing script-related information in a structured manner.
-        /// </remarks>
-        DbSet<ScriptRecord> ScriptRecords { get; }
+        /// <returns>A task that represents the asynchronous add operation.</returns>
+        Task AddScriptRecord(ScriptRecord scriptRecord, CancellationToken cancellationToken);
 
         /// <summary>
         /// Asynchronously saves all changes made in the current context to the database.

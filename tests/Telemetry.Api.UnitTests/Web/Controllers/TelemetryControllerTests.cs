@@ -35,15 +35,15 @@ namespace Telemetry.Api.UnitTests.Web.Controllers
         {
             // Arrange
             ScriptRecordDto dto = CreateValidScriptRecordDto();
-            Mock<DbSet<ScriptRecord>> mockDbSet = new();
-            _mockContext.Setup(c => c.ScriptRecords).Returns(mockDbSet.Object);
+            _mockContext.Setup(c => c.AddScriptRecord(It.IsAny<ScriptRecord>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.CompletedTask);
 
             // Act
             IActionResult result = await _controller.PostScript(dto);
 
             // Assert
             await Assert.That(result).IsTypeOf<OkResult>();
-            _mockContext.Verify(c => c.ScriptRecords.Add(It.IsAny<ScriptRecord>()), Times.Once);
+            _mockContext.Verify(c => c.AddScriptRecord(It.IsAny<ScriptRecord>(), It.IsAny<CancellationToken>()), Times.Once);
             _mockContext.Verify(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
@@ -52,15 +52,15 @@ namespace Telemetry.Api.UnitTests.Web.Controllers
         {
             // Arrange
             EventRecordDto dto = CreateValidEventRecordDto();
-            Mock<DbSet<EventRecord>> mockDbSet = new();
-            _mockContext.Setup(c => c.EventRecords).Returns(mockDbSet.Object);
+            _mockContext.Setup(c => c.AddEventRecord(It.IsAny<EventRecord>(), It.IsAny<CancellationToken>()))
+                .Returns(Task.CompletedTask);
 
             // Act
             IActionResult result = await _controller.PostEvent(dto);
 
             // Assert
             await Assert.That(result).IsTypeOf<OkResult>();
-            _mockContext.Verify(c => c.EventRecords.Add(It.IsAny<EventRecord>()), Times.Once);
+            _mockContext.Verify(c => c.AddEventRecord(It.IsAny<EventRecord>(), It.IsAny<CancellationToken>()), Times.Once);
             _mockContext.Verify(c => c.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
         }
 
@@ -93,7 +93,7 @@ namespace Telemetry.Api.UnitTests.Web.Controllers
             return new ScriptRecordDto()
             {
                 SessionId = Guid.NewGuid(),
-                Meta = new MetaDto() {SchemaVersion = new Version(2, 0)},
+                Meta = new MetaDto() {SchemaVersion = new Version(2, 0, 0)},
                 Timestamp = DateTimeOffset.Now,
                 Username = "user",
                 HostUsername = "host",
@@ -127,7 +127,7 @@ namespace Telemetry.Api.UnitTests.Web.Controllers
             return new EventRecordDto()
             {
                 HandlerId = Guid.NewGuid(),
-                Meta = new MetaDto() {SchemaVersion = new Version(2, 0)},
+                Meta = new MetaDto() {SchemaVersion = new Version(2, 0, 0)},
                 EventType = "DocOpened",
                 Status = "Success",
                 Timestamp = DateTimeOffset.Now,

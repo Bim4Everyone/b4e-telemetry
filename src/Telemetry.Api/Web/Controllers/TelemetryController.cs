@@ -60,7 +60,7 @@ namespace Telemetry.Api.Web.Controllers
                 }
 
                 ScriptRecord record = dto.ToModel();
-                _context.ScriptRecords.Add(record);
+                await _context.AddScriptRecord(record, ct);
 
                 await _context.SaveChangesAsync(ct);
                 _logger.LogInformation("Script record saved: {ExecId} by {Username}", record.ExecId, record.Username);
@@ -105,7 +105,7 @@ namespace Telemetry.Api.Web.Controllers
                 }
 
                 EventRecord record = dto.ToModel();
-                _context.EventRecords.Add(record);
+                await _context.AddEventRecord(record, ct);
 
                 await _context.SaveChangesAsync(ct);
                 _logger.LogInformation("Event record saved: {Type} by {Username}", record.EventType, record.Username);
