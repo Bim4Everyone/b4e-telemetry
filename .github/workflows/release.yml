@@ -10,6 +10,10 @@ env:
   PUBLISH_PATH: /publish
   MIGRATIONS_PATH: migrations
 
+permissions:
+  contents: read
+  packages: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -75,14 +79,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - name: Generate version
-        run: echo "VERSION=2.0.0.${{ github.run_number }}" >> $GITHUB_ENV
+      
+      - name: Generate a version
+        run: echo "VERSION=2.0.${{ github.run_number }}" >> $GITHUB_ENV
       
       - name: Login to Docker Hub
         uses: docker/login-action@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
   
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v4
@@ -96,7 +102,7 @@ jobs:
           push: true
           context: .
           file: src/Telemetry.Api/Dockerfile
-          tags: pyrevitlabs/pyrevit-telemetry:latest
+          tags: ghcr.io/${{ github.repository }}:latest
   
       - name: Build and push
         uses: docker/build-push-action@v7
@@ -104,4 +110,4 @@ jobs:
           push: true
           context: .
           file: src/Telemetry.Api/Dockerfile
-          tags: pyrevitlabs/pyrevit-telemetry:${{ env.VERSION }}
+          tags: ghcr.io/${{ github.repository }}:${{ env.VERSION }}
