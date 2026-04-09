@@ -74,7 +74,7 @@ namespace Telemetry.Api.IntegrationTests
                         Type = "ironpython",
                         Version = "2.7.12",
                         SysPath = ["path1", "path2"],
-                        Configs = "some configs"
+                        Configs = "{}"
                     }
                 },
                 CommandResults = "{}"
