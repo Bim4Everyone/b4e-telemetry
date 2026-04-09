@@ -8,9 +8,9 @@ on:
   workflow_dispatch:
 
 env:
-  BUILD_PATH: /bin
+  BUILD_PATH: bin
   BUILD_CONFIGURATION: ${{ startsWith(github.ref, 'refs/tags/') && 'Release' || 'Debug' }}
-  PUBLISH_PATH: /publish
+  PUBLISH_PATH: publish
   MIGRATIONS_PATH: migrations
 
 permissions:
