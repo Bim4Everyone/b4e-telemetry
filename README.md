@@ -47,7 +47,7 @@ The project provides several Docker Compose configurations to support different 
 To start the API using the pre-built image, you can pull the latest version:
 
 ```bash
-docker pull pyrevit-telemetry:latest
+docker pull ghcr.io/pyrevitlabs/telemetry-server:latest
 ```
 
 To start the API with a specific database, use the following command structure:
