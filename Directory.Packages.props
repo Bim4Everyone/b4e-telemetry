@@ -12,7 +12,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.InMemory" Version="10.0.8" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.8" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="10.0.8" />
-    <PackageVersion Include="MongoDB.EntityFrameworkCore" Version="10.0.1" />
+    <PackageVersion Include="MongoDB.EntityFrameworkCore" Version="10.0.2" />
     <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.2" />
     <PackageVersion Include="Oracle.EntityFrameworkCore" Version="10.23.26200" />
     <PackageVersion Include="prometheus-net.AspNetCore" Version="8.2.1" />
@@ -28,7 +28,7 @@
       <PackageVersion Include="SharpCompress" Version="0.49.1" />
   </ItemGroup>
   <ItemGroup>
-    <PackageVersion Include="TUnit" Version="1.48.6" />
+    <PackageVersion Include="TUnit" Version="1.49.0" />
     <PackageVersion Include="Moq" Version="4.20.72" />
     <PackageVersion Include="Microsoft.AspNetCore.Mvc.Testing" Version="10.0.8" />
     <PackageVersion Include="Testcontainers" Version="4.12.0" />
