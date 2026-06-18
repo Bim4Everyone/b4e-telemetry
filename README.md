@@ -29,7 +29,7 @@ The project follows a Clean Architecture approach:
 To build the project locally, run the following command from the root directory:
 
 ```bash
-dotnet build telemetry-server.slnx
+dotnet build b4e-telemetry.slnx
 ```
 
 To run the application:
@@ -47,7 +47,7 @@ The project provides several Docker Compose configurations to support different 
 To start the API using the pre-built image, you can pull the latest version:
 
 ```bash
-docker pull ghcr.io/pyrevitlabs/telemetry-server:latest
+docker pull ghcr.io/Bim4Everyone/b4e-telemetry:latest
 ```
 
 To start the API with a specific database, use the following command structure:

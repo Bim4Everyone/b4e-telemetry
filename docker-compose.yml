@@ -1,7 +1,7 @@
 services:
   telemetry-api:
     container_name: telemetry-api
-    image: ghcr.io/pyrevitlabs/telemetry-server:2.0.14-alpha
+    image: ghcr.io/Bim4Everyone/b4e-telemetry:2.0.0
     ports:
       - "8080:8080"
     environment:

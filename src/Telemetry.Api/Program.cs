@@ -127,7 +127,7 @@ builder.Services.AddSwaggerGen(options =>
             {
                 Name = "GNU GPL v3",
                 Url = new Uri(
-                    "https://raw.githubusercontent.com/pyrevitlabs/telemetry-server/refs/heads/main/LICENSE.md")
+                    "https://raw.githubusercontent.com/Bim4Everyone/b4e-telemetry/refs/heads/main/LICENSE.md")
             }
         });
 });
