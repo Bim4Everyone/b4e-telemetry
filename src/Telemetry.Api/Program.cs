@@ -74,7 +74,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
             break;
         case "mongodb":
             Log.Information("Using MongoDB database");
-            string mongoDbName = builder.Configuration.GetValue<string>("MongoDbDatabaseName") ?? "pyrevit-telemetry";
+            string mongoDbName = builder.Configuration.GetValue<string>("MongoDbDatabaseName") ?? "b4e-telemetry";
             options.UseMongoDB(connectionString, mongoDbName);
 
             break;
@@ -94,7 +94,7 @@ if (dbProviderValue?.Equals("mongodb_native") == true)
         throw new InvalidOperationException("Missing connection string");
     }
 
-    string mongoDbName = builder.Configuration.GetValue<string>("MongoDbDatabaseName") ?? "pyrevit-telemetry";
+    string mongoDbName = builder.Configuration.GetValue<string>("MongoDbDatabaseName") ?? "b4e-telemetry";
     builder.Services.AddSingleton<IMongoClient>(new MongoClient(connectionString));
     builder.Services.AddScoped<IApplicationDbContext>(provider =>
         new MongoNativeDbContext(provider.GetRequiredService<IMongoClient>(), mongoDbName));
