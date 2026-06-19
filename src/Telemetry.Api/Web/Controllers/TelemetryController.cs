@@ -47,7 +47,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
 
                 if (dto.Meta.SchemaVersion.Major != 2)
                 {
@@ -92,7 +94,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
                 
                 if (dto.Meta.SchemaVersion.Major != 2)
                 {
@@ -137,7 +141,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
 
                 LogRecord record = dto.ToModel();
                 await _context.AddLogRecord(record, ct);
@@ -170,7 +176,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
 
                 bool canConnect = await _context.CanConnectAsync(ct);
                 string provider = _context.GetDbProvider();
