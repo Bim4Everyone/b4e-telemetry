@@ -143,7 +143,7 @@ namespace Telemetry.Api.Web.Controllers
                 await _context.AddLogRecord(record, ct);
 
                 await _context.SaveChangesAsync(ct);
-                _logger.LogInformation("Log record saved: {Level} in {PluginName}", record.Level, record.PluginName);
+                _logger.LogInformation("Log record saved: {Level} by {Username}", record.Level, record.RevitUserName);
                 return Ok();
             }
             catch (DbUpdateException ex)
