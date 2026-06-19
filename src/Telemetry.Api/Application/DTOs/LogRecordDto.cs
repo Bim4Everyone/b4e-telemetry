@@ -13,69 +13,59 @@ namespace Telemetry.Api.Application.DTOs
         /// <summary>
         ///     The time at which the event occurred.
         /// </summary>
-        [JsonPropertyName(PropertyNames.Timestamp)]
         public DateTimeOffset Timestamp { get; init; }
 
         /// <summary>
         ///     The level of the event.
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.LogLevel)]
         public required string Level { get; init; }
 
         /// <summary>
         ///     The message template describing the event.
         /// </summary>
         [MaxLength(8000)]
-        [JsonPropertyName(PropertyNames.MessageTemplate)]
         public required string MessageTemplate { get; init; }
 
         /// <summary>
         ///     The render message describing the event.
         /// </summary>
         [MaxLength(8000)]
-        [JsonPropertyName(PropertyNames.RenderedMessage)]
         public required string RenderedMessage { get; init; }
 
         /// <summary>
         ///     An exception associated with the event, or null.
         /// </summary>
         [MaxLength(8000)]
-        [JsonPropertyName(PropertyNames.Exception)]
         [JsonConverter(typeof(DynamicDataJsonConverter))]
         public string? Exception { get; init; }
 
         /// <summary>
         ///     Revit Session Id (unique revit start instance)
         /// </summary>
-        [JsonPropertyName(PropertyNames.LogSessionId)]
         public Guid SessionId { get; init; }
 
         /// <summary>
         ///     Revit plugin name.
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.PluginName)]
         public required string PluginName { get; init; }
 
         /// <summary>
         ///     Revit Plugin Session Id  (unique revit plugin start instance)
         /// </summary>
-        [JsonPropertyName(PropertyNames.PluginSessionId)]
         public Guid PluginSessionId { get; init; }
 
         /// <summary>
         ///     Environment UserName
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.EnvironmentUserName)]
         public required string EnvironmentUserName { get; init; }
 
         /// <summary>
         ///     Environment MachineName
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.EnvironmentMachineName)]
         public required string EnvironmentMachineName { get; init; }
 
         /// <summary>
@@ -83,28 +73,24 @@ namespace Telemetry.Api.Application.DTOs
         ///     property.
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.LogRevitBuild)]
         public required string RevitBuild { get; init; }
 
         /// <summary>
         ///     Revit <a href="https://www.revitapidocs.com/2017.1/320391bf-2c21-98ca-192c-da1d9becff11.htm">VersionNumber</a>
         ///     property.
         /// </summary>
-        [JsonPropertyName(PropertyNames.LogRevitVersion)]
         public int RevitVersion { get; init; }
 
         /// <summary>
         ///     Revit <a href="https://www.revitapidocs.com/2017.1/2b1d8b80-a11c-2a57-63bd-6c0d67691879.htm">Language</a> property.
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.RevitLanguage)]
         public required string RevitLanguage { get; init; }
 
         /// <summary>
         ///     Revit <a href="https://www.revitapidocs.com/2017.1/2a7c8664-de0d-7a43-e670-2e733e579609.htm">Username</a> property.
         /// </summary>
         [MaxLength(100)]
-        [JsonPropertyName(PropertyNames.RevitUserName)]
         public string? RevitUserName { get; init; }
 
         /// <summary>
@@ -112,7 +98,6 @@ namespace Telemetry.Api.Application.DTOs
         ///     property.
         /// </summary>
         [MaxLength(250)]
-        [JsonPropertyName(PropertyNames.RevitDocumentTitle)]
         public string? RevitDocumentTitle { get; init; }
 
         /// <summary>
@@ -120,7 +105,6 @@ namespace Telemetry.Api.Application.DTOs
         ///     property.
         /// </summary>
         [MaxLength(1024)]
-        [JsonPropertyName(PropertyNames.RevitDocumentPathName)]
         public string? RevitDocumentPathName { get; init; }
 
         /// <summary>
@@ -133,14 +117,12 @@ namespace Telemetry.Api.Application.DTOs
         ///     <a href="https://www.revitapidocs.com/2017.1/6d42ee05-5738-8685-2165-57f9809f3161.htm">Document.GetWorksharingCentralModelPath()</a>.
         /// </summary>
         [MaxLength(1024)]
-        [JsonPropertyName(PropertyNames.RevitDocumentModelPath)]
         public string? RevitDocumentModelPath { get; init; }
 
         /// <summary>
         ///     Dynamic properties data.
         /// </summary>
         [MaxLength(8000)]
-        [JsonPropertyName(PropertyNames.LogEvent)]
         [JsonConverter(typeof(DynamicDataJsonConverter))]
         public string? LogEvent { get; init; }
     }
