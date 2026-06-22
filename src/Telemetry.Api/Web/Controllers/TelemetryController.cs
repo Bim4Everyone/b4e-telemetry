@@ -47,7 +47,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
 
                 if (dto.Meta.SchemaVersion.Major != 2)
                 {
@@ -92,7 +94,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
                 
                 if (dto.Meta.SchemaVersion.Major != 2)
                 {
@@ -124,6 +128,43 @@ namespace Telemetry.Api.Web.Controllers
         }
 
         /// <summary>
+        ///     Adds log record to DB.
+        /// </summary>
+        /// <param name="dto">Adding log records.</param>
+        /// <returns>Returns adding log records task.</returns>
+        [HttpPost("logs")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        [ProducesResponseType(503)]
+        public async Task<IActionResult> PostLog([FromBody] LogRecordDto dto)
+        {
+            try
+            {
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
+
+                LogRecord record = dto.ToModel();
+                await _context.AddLogRecord(record, ct);
+
+                await _context.SaveChangesAsync(ct);
+                _logger.LogInformation("Log record saved: {Level} by {Username}", record.Level, record.RevitUserName);
+                return Ok();
+            }
+            catch (DbUpdateException ex)
+            {
+                _logger.LogError(ex, "Database error while saving log record");
+                return StatusCode(503);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Unexpected error while saving log record");
+                return StatusCode(500);
+            }
+        }
+
+        /// <summary>
         /// Retrieves the current status.
         /// </summary>
         /// <returns>The current status as a status object.</returns>
@@ -135,7 +176,9 @@ namespace Telemetry.Api.Web.Controllers
         {
             try
             {
-                CancellationToken ct = HttpContext.RequestAborted;
+                // NOTE: Cancellation disabled.
+                // Old pyRevit version bug: cancels requests right after connecting.
+                CancellationToken ct = CancellationToken.None; // HttpContext.RequestAborted;
 
                 bool canConnect = await _context.CanConnectAsync(ct);
                 string provider = _context.GetDbProvider();

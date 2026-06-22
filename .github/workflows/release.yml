@@ -105,11 +105,11 @@ jobs:
       - name: Create zip
         run: |
           cd ${{ env.PUBLISH_PATH }}
-          zip -r ../telemetry-server-${{ steps.vars.outputs.version }}.zip .
+          zip -r ../b4e-telemetry-${{ steps.vars.outputs.version }}.zip .
 
       - name: Generate checksum
         run: |
-          sha256sum telemetry-server-${{ steps.vars.outputs.version }}.zip > checksums.txt
+          sha256sum b4e-telemetry-${{ steps.vars.outputs.version }}.zip > checksums.txt
 
       - name: Generate metadata
         run: |
@@ -132,7 +132,7 @@ jobs:
           prerelease: false
           generate_release_notes: true
           files: |
-            telemetry-server-${{ steps.vars.outputs.version }}.zip
+            b4e-telemetry-${{ steps.vars.outputs.version }}.zip
             checksums.txt
             build-info.json
   

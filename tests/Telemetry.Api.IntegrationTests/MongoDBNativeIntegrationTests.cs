@@ -12,7 +12,7 @@ namespace Telemetry.Api.IntegrationTests
 
         protected override string DbProvider => "mongodb_native";
         protected override string ConnectionString => _container.GetConnectionString();
-        protected override string MongoDbDatabaseName => "pyrevit-telemetry";
+        protected override string MongoDbDatabaseName => "b4e-telemetry";
 
         public override async Task InitializeAsync()
         {

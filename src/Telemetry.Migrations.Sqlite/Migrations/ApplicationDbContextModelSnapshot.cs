@@ -15,7 +15,7 @@ namespace Telemetry.Migrations.Sqlite.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.5");
+            modelBuilder.HasAnnotation("ProductVersion", "10.0.9");
 
             modelBuilder.Entity("Telemetry.Api.Domain.Models.EventRecord", b =>
                 {
@@ -116,6 +116,112 @@ namespace Telemetry.Migrations.Sqlite.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("events");
+                });
+
+            modelBuilder.Entity("Telemetry.Api.Domain.Models.LogRecord", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT")
+                        .HasColumnName("_id");
+
+                    b.Property<string>("EnvironmentMachineName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("env_machinename");
+
+                    b.Property<string>("EnvironmentUserName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("env_username");
+
+                    b.Property<string>("Exception")
+                        .HasMaxLength(8000)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("exception");
+
+                    b.Property<string>("Level")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("log_level");
+
+                    b.Property<string>("LogEvent")
+                        .HasMaxLength(8000)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("log_event");
+
+                    b.Property<string>("MessageTemplate")
+                        .IsRequired()
+                        .HasMaxLength(8000)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("message_template");
+
+                    b.Property<string>("PluginName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("plugin_name");
+
+                    b.Property<Guid>("PluginSessionId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("plugin_session_id");
+
+                    b.Property<string>("RenderedMessage")
+                        .IsRequired()
+                        .HasMaxLength(8000)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("rendered_message");
+
+                    b.Property<string>("RevitBuild")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("revit_build");
+
+                    b.Property<string>("RevitDocumentModelPath")
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("doc_modelpath");
+
+                    b.Property<string>("RevitDocumentPathName")
+                        .HasMaxLength(1024)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("doc_pathname");
+
+                    b.Property<string>("RevitDocumentTitle")
+                        .HasMaxLength(250)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("doc_title");
+
+                    b.Property<string>("RevitLanguage")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("revit_language");
+
+                    b.Property<string>("RevitUserName")
+                        .HasMaxLength(100)
+                        .HasColumnType("TEXT")
+                        .HasColumnName("revit_username");
+
+                    b.Property<int>("RevitVersion")
+                        .HasColumnType("INTEGER")
+                        .HasColumnName("revit_version");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("session_id");
+
+                    b.Property<DateTimeOffset>("Timestamp")
+                        .HasColumnType("TEXT")
+                        .HasColumnName("timestamp");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("logs");
                 });
 
             modelBuilder.Entity("Telemetry.Api.Domain.Models.ScriptRecord", b =>

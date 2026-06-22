@@ -1,0 +1,23 @@
+{
+  "Timestamp": "2024-03-27T10:00:00Z",
+  "Level": "Information",
+  "MessageTemplate": "User {UserName} logged in from {IpAddress}",
+  "RenderedMessage": "User testuser logged in from 127.0.0.1",
+  "Exception": null,
+  "SessionId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+  "PluginName": "TestPlugin",
+  "PluginSessionId": "4fa85f64-5717-4562-b3fc-2c963f66afa7",
+  "EnvironmentUserName": "testuser",
+  "EnvironmentMachineName": "test-machine",
+  "RevitBuild": "2024.1",
+  "RevitVersion": 2024,
+  "RevitLanguage": "ENU",
+  "RevitUserName": "revit-testuser",
+  "RevitDocumentTitle": "test.rvt",
+  "RevitDocumentPathName": "C:\\test.rvt",
+  "RevitDocumentModelPath": "C:\\test.rvt",
+  "LogEvent": {
+    "UserName": "testuser",
+    "IpAddress": "127.0.0.1"
+  }
+}
