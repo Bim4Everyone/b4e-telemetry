@@ -1,0 +1,25 @@
+using System.Text.Json.Serialization;
+
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace Bim4EveryoneTelemetry.Models.Scripts;
+
+/// <summary>
+///     Script executed information.
+/// </summary>
+public record TraceInfo {
+    /// <summary>
+    ///     Script executed
+    ///     <a href="https://www.revitapidocs.com/2022/ab42c8d3-d361-88d2-5043-2d427d1238fc.htm">message</a>.
+    /// </summary>
+    [BsonElement("message")]
+    [JsonPropertyName("message")]
+    public required string Message { get; init; } 
+
+    /// <summary>
+    ///     Script engine information.
+    /// </summary>
+    [BsonElement("engine")]
+    [JsonPropertyName("engine")]
+    public required EngineInfo Engine { get; init; }
+}
